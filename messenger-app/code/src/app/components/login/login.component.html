@@ -1,0 +1,40 @@
+<messenger-signed-out-header></messenger-signed-out-header>
+<section>
+    <div class="left">
+        <div class="login-info">
+            <h2>LOGIN INFORMATION</h2>
+            <img src="assets/images/skull.png" > 
+        </div>
+    </div>
+    <div class="right">
+        <div class="login-input">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="login-label" id="login-label-id">
+                    <label>Login</label>
+                </div>
+                <div>
+                    <label>Don't have an account? <a routerLink="/sign-up">Sign Up</a></label>
+                </div>
+                <div *ngIf="isInvalidCredentials">
+                    <label style="color: red;">Invalid username or password</label>
+                </div>
+                <div class="email">
+                    <label>Email Address</label>
+                    <input formControlName="email" placeholder="you@email.com">
+                </div>
+                <label *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched" style="color: red;">This is required</label>
+                <label *ngIf="loginForm.get('email')?.errors?.['pattern']" style="color: red;">Enter a valid email</label>
+                <div class="password">
+                    <label>Password</label>
+                    <input formControlName="password" placeholder="password">
+                </div>
+                <label *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched" style="color: red;">This is required</label>
+                
+                <div>
+                    <button type="submit" [disabled]="loginForm.invalid">Submit</button>
+                </div>
+            
+            </form>
+        </div>
+    </div>
+</section>
